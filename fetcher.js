@@ -22,7 +22,7 @@ request(paths[0], (error, response, body) => {
         rl.question('File exists, do you want to overwrite the while or exit app?', (answer) => {
             if (answer === 'Y' || answer === 'y') {
                 fs.writeFile(paths[1], body, (err) => {
-                    console.log('File overwritten successfully');
+                    console.log(`Downloaded and overwritten ${response.headers['content-length']} bytes to ${paths[1]}`);
                 });
             } 
             rl.close();
@@ -33,7 +33,7 @@ request(paths[0], (error, response, body) => {
                 console.log('Invalid path!!!');
                 throw err;
             }
-            console.log('File written successfully');
+            console.log(`Downloaded and saved ${response.headers['content-length']} bytes to ${paths[1]}`);
             process.exit();
         });
     }
